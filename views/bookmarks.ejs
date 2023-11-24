@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Book Shelf | Rich Ink</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+
+    <!-- Mobile Specific Metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+       <!-- Logo Font  -->
+       <link rel="preconnect" href="https://fonts.googleapis.com">
+       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+       <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <!-- Favicon
+    ================================================== -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon.png">
+
+    <!-- Stylesheets
+    ================================================== -->
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/responsive.css" rel="stylesheet">
+    <link href="bookshelf.css" rel="stylesheet">
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+    <header id="masthead" class="site-header">
+        <nav id="primary-navigation" class="site-navigation">
+            <div class="container">
+
+                <div class="navbar-header">
+                   
+                    <a class="site-title" href="/profile"><span>Rich Ink</span></a>
+
+                </div><!-- /.navbar-header -->
+
+                <div class="collapse navbar-collapse" id="agency-navbar-collapse">
+
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li class="active"><a href="/profile">Home</a></li>
+  
+
+                        </li>
+                        <li><a href="/booksearch">Book Search</a></li>
+                        <li><a href="/bookmarks">Book Shelf</a></li>
+                        <li><a href="/bookrecs">Book Reccomendations</a></li>
+                        <li><a href="/communityforum">Community Forum</a></li>
+                        <li><a href="/logout">Logout</a></li>
+
+                    </ul>
+
+                </div>
+
+            </div>   
+        </nav><!-- /.site-navigation -->
+    </header><!-- /#mastheaed -->
+
+
+    <div id="hero" class="hero overlay subpage-hero portfolio-hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Bookshelf</h1>
+
+            </div><!-- /.hero-text -->
+        </div><!-- /.hero-content -->
+    </div><!-- /.hero -->
+    <main id="main" class="site-main">
+
+        <section class="site-section subpage-site-section section-portfolio">
+            <div class="container">
+  
+  
+                <ul class="portfolio-sorting list-inline text-center">
+                    <li><a href="/bookmarks" class="btn btn-gray active" data-group="all">All</a></li>
+                    <li><a href="/bookmarks?status=Want+To+Read" class="btn btn-gray" data-group="want-to-read">Want to Read</a></li>
+                    <li><a href="/bookmarks?status=Read" class="btn btn-gray" data-group="read">Read</a></li>
+                    <li><a href="/bookmarks?status=Currently+Reading" class="btn btn-gray" data-group="currently-reading">Currently Reading</a></li>
+                </ul>
+
+
+
+                <ul>
+                  <% for(var i=0; i<books.length; i++) {%>
+                    <li class="col-6 justify-content-between mt-5 book-item" data-groups="<%= books[i].status %>">
+                      <img class="img-fluid" src="<%= books[i].cover %>">
+                      <span><%= books[i].title %></span>
+                      <span><%= books[i].author %></span>
+                      <form class="col-1" action="/bookmarks/<%= books[i]._id %>" method="POST">
+                        <!-- Set the value of the hidden input field -->
+                        <input type="hidden" name="status" value="<%= books[i].status %>">
+                
+                        <!-- Set the value of the hidden field when a button is clicked -->
+                        <button class="btn btn-primary <%=books[i].status === 'Want To Read' ? 'active' : '' %>" name="statusValue" value="Want To Read" type="submit" data-group="want-to-read">Want To Read</button>
+                        <button class="btn btn-primary <%=books[i].status === 'Currently Reading' ? 'active' : '' %>" name="statusValue" value="Currently Reading" type="submit" data-group="currently-reading">Currently Reading</button>
+                        <button class="btn btn-primary <%=books[i].status === 'Read' ? 'active' : '' %>" name="statusValue" value="Read" type="submit" data-group="read">Read</button>
+                      </form>
+                    </li>
+                  <% } %>
+                </ul>
+                
+
+<div id="grid" class="row">
+
+</div>
+</section><!-- /.section-portfolio -->
+
+</main><!-- /#main -->
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap-select.min.js"></script>
+<script src="assets/js/jquery.slicknav.min.js"></script>
+<script src="assets/js/jquery.countTo.min.js"></script>
+<script src="assets/js/jquery.shuffle.min.js"></script>
+<!-- <script src="assets/js/script.js"></script>
+<script src="bookmarks.js"></script> -->
+<!-- <script src="main.js"></script>
+
+</body>
+</html>
